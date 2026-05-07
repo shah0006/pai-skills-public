@@ -1,0 +1,32 @@
+# macOS
+.DS_Store
+*.swp
+
+# Editor
+.vscode/
+.idea/
+
+# Bun / Node
+node_modules/
+*.log
+*.tsbuildinfo
+bun.lockb.bak
+
+# Skill state (regenerated at runtime)
+state/
+cursor.txt
+*.cursor
+
+# Credentials
+.env
+.env.local
+*.token
+*.refresh_token
+
+# Backup artifacts
+*.pre-path-fix-backup
+*.bak
+
+# PAI registry files (regenerable; may contain user-specific paths)
+skill-index.json
+knowledge-index.json

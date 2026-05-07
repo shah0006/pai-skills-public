@@ -1,0 +1,32 @@
+NOTICE — third-party attributions
+
+This repository mirrors a local PAI v5 skills install. Many skills here
+originate from Daniel Miessler's Personal AI Infrastructure project:
+
+	upstream:  https://github.com/danielmiessler/Personal_AI_Infrastructure
+	v5 release: https://github.com/danielmiessler/Personal_AI_Infrastructure/tree/main/Releases/v5.0.0
+	license:    MIT (original)
+
+Miessler-authored skills carried unmodified from upstream:
+
+	Agents, ApertureOscillation, Aphorisms, Apify, ArXiv, Art, AudioEditor,
+	BeCreative, BitterPillEngineering, BrightData, Browser, CitationSculptor,
+	ContextSearch, CreateCLI, CreateSkill, Daemon, Delegation, ExtractWisdom,
+	Fabric, FirstPrinciples, Interceptor, Interview, ISA, IterativeDepth, Loop,
+	Migrate, Optimize, PAIUpgrade, PrivateInvestigator, Prompting, RedTeam,
+	Remotion, Sales, Science, Telos, USMetrics, Webdesign, WorldThreatModel,
+	WriteStory
+
+Miessler-authored skills with local modifications by shah0006 (per-skill
+README documents the fork rationale and contribution scope):
+
+	Council, Evals, Ideate, Knowledge, Research, RootCauseAnalysis,
+	SystemsThinking
+
+User-authored skills (no upstream — original work by shah0006):
+
+	AppleMail, AppleMessages, DoclingPDF, GmailSender, GoogleWorkspaceCLI,
+	VaultLint
+
+EmailTriage is hosted separately at https://github.com/shah0006/pai-email-triage
+and is not mirrored in this repository.
