@@ -1,0 +1,22 @@
+# Apple Mail Watch — VIP Senders
+# One name or email fragment per line. Case-insensitive partial match.
+# Lines starting with # are comments.
+
+# Family
+bina5515@yahoo.com
+bina.shah
+shah0061@yahoo.com
+
+# Financial / Insurance
+rob.koscik
+dlakadvisors
+dwarner
+lsbenefitsgrp
+
+# Legal
+cooney
+cooneyllc
+
+# Medical Board
+oregon.gov
+omb
