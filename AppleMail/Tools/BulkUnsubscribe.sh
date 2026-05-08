@@ -52,11 +52,13 @@ trap 'rm -rf "$WORK_DIR"' EXIT
 echo "=== Bulk Unsubscribe v2.0: $ACCOUNT / $MAILBOX ===" >&2
 echo "Parallel: $PARALLEL | Dry run: $DRY_RUN | Trash: $TRASH_AFTER | Block: $BLOCK_SENDERS" >&2
 
-# Log file
-LOG_DIR="/Volumes/Hyperdrive 4 Tb/Main Obsidian (Sync)/20 - Projects/Active Projects/19 - Morning Email Triage/Notes/Unsubscribe Logs"
+# Log file — override via APPLEMAIL_UNSUBSCRIBE_LOG_DIR; falls back to SKILLCUSTOMIZATIONS, then a local cache dir
+LOG_DIR="${APPLEMAIL_UNSUBSCRIBE_LOG_DIR:-${PAI_DIR:-$HOME/.claude/PAI}/USER/SKILLCUSTOMIZATIONS/AppleMail/UnsubscribeLogs}"
 if [[ ! -d "$LOG_DIR" ]]; then
-  LOG_DIR="${HOME}/.claude/skills/AppleMail/logs"
-  mkdir -p "$LOG_DIR"
+  if ! mkdir -p "$LOG_DIR" 2>/dev/null; then
+    LOG_DIR="${HOME}/.cache/AppleMail/UnsubscribeLogs"
+    mkdir -p "$LOG_DIR"
+  fi
 fi
 LOG_FILE="${LOG_DIR}/Unsubscribe Log $(date +%Y-%m-%d_%H:%M) - ${MAILBOX}.log"
 echo "Log: $LOG_FILE" >&2

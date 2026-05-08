@@ -17,5 +17,5 @@ Save attachments to disk; export an email to Obsidian-flavoured Markdown.
 
 ```
 apple-mail.sh save-attachment 79132 -o ~/Downloads/invoices/
-apple-mail.sh export 79132 -o "/Volumes/Hyperdrive 4 Tb/Main Obsidian (Sync)/Email Triage/Archive/2026-05-05 invoice.email.md"
+apple-mail.sh export 79132 -o "<vault-root>/Email Triage/Archive/2026-05-05 invoice.email.md"
 ```

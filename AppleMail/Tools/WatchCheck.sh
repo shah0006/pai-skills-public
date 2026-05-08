@@ -11,7 +11,7 @@ STATE_FILE="$CACHE_DIR/last-check.json"
 LOG_FILE="$CACHE_DIR/watch.log"
 VIP_FILE="${PAI_DIR:-$HOME/.claude/PAI}/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt"
 # Fallback to legacy location during the verification window
-[[ ! -f "$VIP_FILE" ]] && VIP_FILE="$HOME/.claude/skills/AppleMail/watch-vip.txt"
+[[ ! -f "$VIP_FILE" ]] && VIP_FILE="$HOME/.claude/skills/AppleMail/Tools/watch-vip.txt"
 [[ ! -f "$VIP_FILE" ]] && echo "Warning: VIP file not found at $VIP_FILE — VIP filtering disabled" >&2
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 APPLE_MAIL="$SCRIPT_DIR/apple-mail.sh"
