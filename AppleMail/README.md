@@ -47,7 +47,7 @@ bash ~/.claude/skills/AppleMail/Tools/TestAppleMail.sh
 - `Tools/` — `apple-mail.sh` and helpers (`Accounts.sh`, `BulkUnsubscribe.sh`, `WatchCheck.sh`, `TestAppleMail.sh`)
 - `Workflows/` — procedural `.md` (one per major operation: Read, Search, Send, Manage, BulkOps, Watch, Export, Setup)
 - `References/` — reference docs (CommandRef, MultiAccount, OutputFormats)
-- `watch-vip.txt` — default VIP sender list (override at `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt`)
+- `Tools/watch-vip.txt` — default VIP sender list (override at `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt`)
 
 ## Promotion notes
 

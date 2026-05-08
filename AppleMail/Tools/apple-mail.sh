@@ -3751,7 +3751,7 @@ run_doctor() {
     local envelope_db
     envelope_db=$(ls -1 "$HOME/Library/Mail/V"*"/MailData/Envelope Index" 2>/dev/null | head -1)
     local vip_user="${PAI_DIR:-$HOME/.claude/PAI}/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt"
-    local vip_default="$HOME/.claude/skills/AppleMail/watch-vip.txt"
+    local vip_default="$HOME/.claude/skills/AppleMail/Tools/watch-vip.txt"
 
     echo "Apple Mail Skill v${VERSION} — doctor"
     echo "----------------------------------------"

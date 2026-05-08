@@ -14,7 +14,7 @@ Full-featured macOS Mail.app control via a 27-command bash script wrapping Apple
 
 Script: `~/.claude/skills/AppleMail/Tools/apple-mail.sh` (alias: `apple-mail.sh` if added to PATH)
 Accounts: configured in `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/accounts.yaml` (per-account aliases + default-from)
-VIP list (default): `~/.claude/skills/AppleMail/watch-vip.txt` (override at `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt`)
+VIP list (default): `~/.claude/skills/AppleMail/Tools/watch-vip.txt` (override at `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt`)
 Doctor: `Tools/apple-mail.sh doctor` — verifies Mail.app reachable, accounts.yaml present, AppleScript permissions granted.
 
 ## Mailbox Names
@@ -120,7 +120,7 @@ Not-found IDs produce warnings but do not stop the batch. Output: `N of M messag
 | `watch vip` | Display VIP sender list |
 | `watch vip-add <sender>` | Add VIP sender (case-insensitive partial match) |
 
-VIP list: `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt` (preferred) or `~/.claude/skills/AppleMail/watch-vip.txt` (fallback) | Log: `~/.cache/apple-mail-watch/watch.log`
+VIP list: `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt` (preferred) or `~/.claude/skills/AppleMail/Tools/watch-vip.txt` (fallback) | Log: `~/.cache/apple-mail-watch/watch.log`
 
 ### Info
 
