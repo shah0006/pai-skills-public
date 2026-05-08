@@ -1,22 +1,26 @@
 # Apple Mail Watch — VIP Senders
 # One name or email fragment per line. Case-insensitive partial match.
 # Lines starting with # are comments.
-
+#
+# This file is the default VIP list shipped with the skill. To customize for
+# your environment, place a personal copy at:
+#   ~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt
+# The watch-check.sh tool prefers the SKILLCUSTOMIZATIONS path when present.
+#
+# Examples (commented out — copy into your customization file and edit):
+#
 # Family
-bina5515@yahoo.com
-bina.shah
-shah0061@yahoo.com
-
+# yourfamilymember@example.com
+# their.last.name
+#
 # Financial / Insurance
-rob.koscik
-dlakadvisors
-dwarner
-lsbenefitsgrp
-
+# advisor.lastname
+# insurance-firm
+#
 # Legal
-cooney
-cooneyllc
-
-# Medical Board
-oregon.gov
-omb
+# attorney.lastname
+# law-firm
+#
+# Medical / Licensing
+# medical-board.gov
+# state-licensing-domain

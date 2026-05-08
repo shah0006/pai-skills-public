@@ -1,6 +1,6 @@
 ---
 name: AppleMail
-description: Read, send, search, and reply to emails via macOS Mail.app (Apple Mail). USE WHEN user wants to check Apple Mail inbox or any folder, read an email, send email (with attachments), search emails (with date range), reply/reply-all/forward (with CC/BCC), flag/move/trash/archive emails, save attachments to disk, export to Markdown, bulk operations (bulk-trash, bulk-move, bulk-mark-read), thread-read with full bodies, check unread counts, list email accounts and folders, open a specific email in Mail.app GUI, OR stage this email (create draft and open for review). Differentiator -- 27-command bash script wrapping AppleScript for full Mail.app control including bulk ops, watch monitoring, and Obsidian export. CONSTRAINT: All email composition MUST go through vault draft file (Email Triage/Drafts/*.email.md) BEFORE touching Mail.app. Never compose directly in Mail.app.
+description: Read, send, search, and reply to emails via macOS Mail.app (Apple Mail). USE WHEN user wants to check Apple Mail inbox or any folder, read an email, send email (with attachments), search emails (with date range), reply/reply-all/forward (with CC/BCC), flag/move/trash/archive emails, save attachments to disk, export to Markdown, bulk operations (bulk-trash, bulk-move, bulk-mark-read), thread-read with full bodies, check unread counts, list email accounts and folders, open a specific email in Mail.app GUI, OR stage this email (create draft and open for review). Differentiator -- 27-command bash script wrapping AppleScript for full Mail.app control including bulk ops, watch monitoring, and Obsidian export. CONSTRAINT: All email composition MUST go through vault draft file (Email Triage/Drafts/*.email.md) BEFORE touching Mail.app. Never compose directly in Mail.app. NOT FOR Gmail-only OAuth API workflows (use GoogleWorkspaceCLI), iMessage / SMS (use AppleMessages), or external SMTP relays (use a dedicated mailer).
 context: fork
 ---
 
@@ -9,11 +9,13 @@ context: fork
 # SKILL
 ## Customization
 **Before executing, check for user customizations at:**
-`~/.claude/skills/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/`
+`~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/`
 Full-featured macOS Mail.app control via a 27-command bash script wrapping AppleScript. Supports inbox reading, sending with attachments, search with date ranges, reply/reply-all/forward with CC/BCC, bulk operations (trash, move, mark-read), thread reading with full bodies, attachment saving, Markdown export, folder management, and unread count monitoring across multiple accounts.
 
-Script: `~/.claude/skills/AppleMail/apple-mail.sh` (alias: `apple-mail.sh`)
+Script: `~/.claude/skills/AppleMail/Tools/apple-mail.sh` (alias: `apple-mail.sh` if added to PATH)
 Accounts: configured in `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/accounts.yaml` (per-account aliases + default-from)
+VIP list (default): `~/.claude/skills/AppleMail/watch-vip.txt` (override at `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt`)
+Doctor: `Tools/apple-mail.sh doctor` — verifies Mail.app reachable, accounts.yaml present, AppleScript permissions granted.
 
 ## Mailbox Names
 `inbox` (default) | `sent` | `drafts` | `trash` | `junk` | `"Exact Folder Name"` (custom iCloud folders)
@@ -118,7 +120,7 @@ Not-found IDs produce warnings but do not stop the batch. Output: `N of M messag
 | `watch vip` | Display VIP sender list |
 | `watch vip-add <sender>` | Add VIP sender (case-insensitive partial match) |
 
-VIP list: `~/.claude/skills/AppleMail/watch-vip.txt` | Log: `~/.cache/apple-mail-watch/watch.log`
+VIP list: `~/.claude/PAI/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt` (preferred) or `~/.claude/skills/AppleMail/watch-vip.txt` (fallback) | Log: `~/.cache/apple-mail-watch/watch.log`
 
 ### Info
 

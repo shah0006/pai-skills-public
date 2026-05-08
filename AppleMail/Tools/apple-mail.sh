@@ -430,6 +430,8 @@ WATCH (new mail monitoring):
 INFO:
     accounts
     folders     (shows unread counts -- use folder-tree for plain paths)
+    doctor      (selftest: verify Mail.app reachable, AppleScript permission, Envelope Index readable, accounts.yaml)
+    version     (print version)
 
 MAILBOX NAMES:
     System: inbox, sent, drafts, trash, junk
@@ -3731,11 +3733,79 @@ main() {
             show_usage ;;
         version|--version|-v)
             echo "Apple Mail Skill v${VERSION}" ;;
+        doctor|selftest|--selftest)
+            run_doctor "$@" ;;
         *)
             echo "Unknown command: ${command}"
             echo "Run 'apple-mail.sh help' for usage."
             exit 1 ;;
     esac
+}
+
+# Self-check: prints version, verifies Mail.app reachable, accounts.yaml
+# present, AppleScript Automation permission granted, and the SQLite
+# Envelope Index is readable. Exit 0 = healthy, 1 = at least one check failed.
+run_doctor() {
+    local fail=0
+    local accounts_yaml="${PAI_DIR:-$HOME/.claude/PAI}/USER/SKILLCUSTOMIZATIONS/AppleMail/accounts.yaml"
+    local envelope_db
+    envelope_db=$(ls -1 "$HOME/Library/Mail/V"*"/MailData/Envelope Index" 2>/dev/null | head -1)
+    local vip_user="${PAI_DIR:-$HOME/.claude/PAI}/USER/SKILLCUSTOMIZATIONS/AppleMail/watch-vip.txt"
+    local vip_default="$HOME/.claude/skills/AppleMail/watch-vip.txt"
+
+    echo "Apple Mail Skill v${VERSION} — doctor"
+    echo "----------------------------------------"
+
+    # 1. Mail.app reachable via AppleScript
+    if osascript -e 'tell application "System Events" to (name of processes) contains "Mail"' >/dev/null 2>&1; then
+        echo "  [ok]   System Events reachable"
+    else
+        echo "  [FAIL] System Events not reachable — grant Automation permission to your terminal in System Settings > Privacy & Security > Automation"
+        fail=1
+    fi
+
+    # 2. Accounts config present (warning only, not fatal)
+    if [[ -f "$accounts_yaml" ]]; then
+        echo "  [ok]   accounts.yaml found at $accounts_yaml"
+    else
+        echo "  [warn] accounts.yaml not found at $accounts_yaml — copy the example from README into that path"
+    fi
+
+    # 3. SQLite Envelope Index readable
+    if [[ -n "$envelope_db" && -r "$envelope_db" ]]; then
+        echo "  [ok]   Envelope Index readable at $envelope_db"
+    else
+        echo "  [FAIL] Mail Envelope Index not readable — grant Full Disk Access to your terminal in System Settings > Privacy & Security > Full Disk Access"
+        fail=1
+    fi
+
+    # 4. VIP list resolves (either user or default)
+    if [[ -f "$vip_user" ]]; then
+        echo "  [ok]   VIP list (user override): $vip_user"
+    elif [[ -f "$vip_default" ]]; then
+        echo "  [ok]   VIP list (default): $vip_default"
+    else
+        echo "  [warn] VIP list not found — watch-check VIP filtering disabled"
+    fi
+
+    # 5. AppleScript dispatch — count inbox messages
+    local inbox_count
+    inbox_count=$(osascript -e 'tell application "Mail" to count of messages of inbox' 2>/dev/null || echo "")
+    if [[ -n "$inbox_count" ]]; then
+        echo "  [ok]   Mail.app responded — inbox has $inbox_count message(s)"
+    else
+        echo "  [FAIL] Mail.app did not respond to AppleScript — Automation permission likely missing"
+        fail=1
+    fi
+
+    echo "----------------------------------------"
+    if [[ $fail -eq 0 ]]; then
+        echo "doctor: PASS"
+        return 0
+    else
+        echo "doctor: FAIL"
+        return 1
+    fi
 }
 
 main "$@"
