@@ -1,0 +1,90 @@
+# Morning Email Triage Rules — SEED / TEMPLATE
+# This file ships placeholder examples. The live rules are stored in triage.db.
+# On first run, runMigration() seeds the routing_rules + vip_senders tables from
+# this file (or rules.yaml if present). After that, the DB is the source of truth.
+#
+# Priority order: VIP → Junk → Unsubscribed → Sender → Domain → Subject → AI
+# First match wins. Set stop: false to allow layering.
+#
+# FOLDER REFERENCE — Apple Mail folder names you have configured:
+#   Subscriptions   → newsletters, mailing lists, digests
+#   Receipts        → purchase receipts and order confirmations
+#   Financial       → statements, invoices, billing (non-receipt)
+#   Work            → professional / employment related
+#   Personal        → personal correspondence
+#   Later           → deferred / snoozed (DO NOT route rules here — use defer action)
+#   Blocked         → iCloud only — auto-blocked senders
+
+vip_senders:
+  # Replace these with your own VIP addresses (family, close colleagues, urgent contacts)
+  - vip-example-1@example.com
+  - vip-example-2@example.org
+  # Add VIPs here — always land in Action Required, never auto-processed
+
+sender_rules:
+  # Example: route a specific newsletter to its own folder
+  - match:
+      from: newsletter@example-publisher.com
+    action: archive
+    folder: Subscriptions
+
+  # Example: route receipts from a known vendor
+  - match:
+      from: receipts@example-vendor.com
+    action: archive
+    folder: Receipts
+
+domain_rules:
+  # Example: bulk-archive all newsletters from a domain
+  - match:
+      from_domain: substack.com
+    action: archive
+    folder: Subscriptions
+
+  # Example: medical education
+  - match:
+      from_domain: nejm.org
+    action: archive
+    folder: Medical Education
+
+  # Example: finance / receipts
+  - match:
+      from_domain: stripe.com
+    action: archive
+    folder: Receipts
+
+subject_rules:
+  - match:
+      subject_contains: receipt
+    action: archive
+    folder: Receipts
+
+  - match:
+      subject_contains: "order confirmation"
+    action: archive
+    folder: Receipts
+
+  - match:
+      subject_contains: "statement is ready"
+    action: archive
+    folder: Financial
+
+  - match:
+      subject_contains: invoice
+    action: archive
+    folder: Financial
+
+  - match:
+      subject_contains: "your subscription"
+    action: archive
+    folder: Subscriptions
+
+  - match:
+      subject_contains: "CME"
+    action: archive
+    folder: Medical Education
+
+  - match:
+      subject_contains: "continuing medical education"
+    action: archive
+    folder: Medical Education

@@ -1,0 +1,27 @@
+# Junk Senders Registry — SEED / TEMPLATE
+# This file is a TEMPLATE / starter list. The live database (triage.db) is the source of truth;
+# senders auto-grow into the DB when the user marks BLOCK or JUNK in triage.
+# All entries: auto-trash on next triage, no review, no triage appearance.
+#
+# Two entry types:
+#   by_address:  block a specific email address
+#   by_domain:   block ALL email from an entire domain (more powerful)
+#
+# Examples:
+#   by_address:
+#     - spammer@somesite.com       ← only this address is blocked
+#   by_domain:
+#     - wholejunkdomain.com        ← ALL email from this domain is blocked
+#
+# Replace the placeholders below with your own blocked senders, or leave the
+# arrays empty and let the DB grow organically as you mark BLOCK/JUNK in the UI.
+
+by_address:
+  # Example placeholders — replace with real addresses or remove
+  - example-spammer@example-marketing.com
+  - newsletter@example-ignored.com
+
+by_domain:
+  # Example placeholders — replace with real domains or remove
+  - example-spam-domain.com
+  - example-marketing-domain.com

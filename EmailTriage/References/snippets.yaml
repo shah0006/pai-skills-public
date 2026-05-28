@@ -1,0 +1,43 @@
+# Reply starter snippets — shown in reply editor for quick insertion
+# Keep these short, professional, and adaptable.
+
+snippets:
+  - id: thanks
+    label: Thanks
+    text: "Thanks for reaching out. "
+
+  - id: got-it
+    label: Got it
+    text: "Got it — I'll take a look and follow up shortly."
+
+  - id: need-time
+    label: Need more time
+    text: "Thanks for this. I'll need a bit more time to review — I'll get back to you by end of week."
+
+  - id: confirm
+    label: Confirm receipt
+    text: "Confirmed, thanks. "
+
+  - id: reschedule
+    label: Reschedule
+    text: "I'd like to reschedule — would any of these times work for you: "
+
+  - id: no-action
+    label: No action needed
+    text: "Thanks for the heads up — no action needed on my end."
+
+  - id: forwarding
+    label: Forwarding
+    text: "Forwarding this along to the right person who can help."
+
+  - id: question
+    label: Quick question
+    text: "Quick question before I respond: "
+
+  - id: will-review
+    label: Will review
+    text: "I'll review this and get back to you."
+
+  - id: follow-up
+    label: Follow up
+    text: "Following up on my earlier message — let me know if you need anything else."

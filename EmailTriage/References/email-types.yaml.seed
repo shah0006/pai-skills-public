@@ -1,0 +1,91 @@
+# EmailTriage email-type taxonomy seed (AD-1).
+#
+# Seeds the `email_types` table on first migration. After seeding, the DB table
+# is the source of truth — users customize their taxonomy via the Settings
+# "Categories" panel (DB rows), not by editing this file. The classifier and the
+# AI-summary prompt both derive their type list from the table.
+#
+# Each entry:
+#   name          unique display label
+#   detection     case-insensitive regex; first match in sort_order wins
+#   match_scope   'combined' (subject + body) or 'subject'
+#   must_surface  the AI Summary Rubric Part 2 must-surface fields for this type
+#   sort_order    cascade order — lower wins; specific types must precede generic
+#
+# These 12 are the default taxonomy. They are physician-flavored (CME,
+# Credentialing); a non-doctor user disables those and adds their own via the
+# Settings Categories panel. Regexes are byte-identical to the pre-AD-1
+# hardcoded cascade so detection behavior does not change on migration.
+
+email_types:
+  - name: 'Auth / Security Alert'
+    detection: 'verification.*code|one.time.*password|otp|2fa|login.*attempt'
+    match_scope: combined
+    must_surface: 'what triggered it, the service, time and location, whether the reader must act'
+    sort_order: 10
+
+  - name: 'Receipt / Transaction'
+    detection: 'receipt|order.*confirm|payment.*confirm|invoice|transaction|payment.*received|thank you for your (payment|order)'
+    match_scope: combined
+    must_surface: 'vendor, amount, date, what was paid for'
+    sort_order: 20
+
+  - name: 'Appointment / Reminder'
+    detection: '\bappointment\b|scheduled (for|on) \w|your visit (on|with)|reminder.*on \d|see you on \w|reservation (on|for)|check.in (at|on)'
+    match_scope: combined
+    must_surface: 'what it is, date, time, location or modality, any prep required of the reader'
+    sort_order: 30
+
+  - name: 'Financial / Account'
+    detection: 'statement|credit.*score|account.*balance|billing'
+    match_scope: combined
+    must_surface: 'institution or account, the statement or change, balance or amount, any deadline'
+    sort_order: 40
+
+  - name: 'CME / Medical Education'
+    detection: 'cme|continuing.*education|webinar|symposium|conference|course|credits'
+    match_scope: combined
+    must_surface: 'topic, format, date, credit hours, cost, registration deadline'
+    sort_order: 50
+
+  - name: 'Credentialing / Licensure'
+    detection: 'licensure|credential|board.*cert|renewal.*license'
+    match_scope: combined
+    must_surface: 'which credential or board, the action required, the deadline, the consequence of missing it'
+    sort_order: 60
+
+  - name: 'Recruiter / Job'
+    detection: 'job|position|opportunity|recruit|career|opening'
+    match_scope: combined
+    must_surface: 'role, organization, location, compensation if stated, what the recruiter wants'
+    sort_order: 70
+
+  - name: 'Invitation'
+    detection: 'invitation|you.re invited|join.*team|accept.*invite'
+    match_scope: combined
+    must_surface: 'the event, who is inviting, date, RSVP deadline'
+    sort_order: 80
+
+  - name: 'Reply / Follow-up'
+    detection: 're:|fwd:|follow.up'
+    match_scope: subject
+    must_surface: 'which thread it continues, the new ask or answer, what is now blocked on the reader'
+    sort_order: 90
+
+  - name: 'Shipping / Delivery'
+    detection: 'shipment|delivery|tracking|shipped'
+    match_scope: combined
+    must_surface: 'what is shipping, tracking status, expected delivery date'
+    sort_order: 100
+
+  - name: 'Promotional'
+    detection: 'promo|discount|sale|offer|coupon|off\b'
+    match_scope: combined
+    must_surface: 'the offer in one clause, expiry if relevant'
+    sort_order: 110
+
+  - name: 'Newsletter / Mailing List'
+    detection: 'list-unsubscribe|\bmailing list\b|\bnewsletter\b|unsubscribe from (this newsletter|these emails)|view (this email )?in (your )?browser'
+    match_scope: combined
+    must_surface: 'the one or two genuinely notable items, or that it is routine'
+    sort_order: 120

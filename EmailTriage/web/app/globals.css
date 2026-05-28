@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+:root {
+  /* Ethos brand palette — canonical source: Design Profile - Ethos Brand.md */
+  --color-charcoal:     #1a1a1a;
+  --color-gold:         #b29a68;
+  --color-muted-gold:   #d4c29d;
+  --color-beige:        #e9e3d9;
+  --color-warm-gray:    #888888;
+  --color-forest-green: #2a4033;
+  --color-muted-rose:   #c08081;
+  --gold-pressed:       #9a8458;
+
+  /* Hybrid dark surfaces — charcoal anchor instead of generic dark gray */
+  --bg:        var(--color-charcoal);
+  --surface:   #222222;
+  --surface-2: #1f1f1f;
+  --border:    rgba(42, 64, 51, 0.55); /* forest-green hairline at low alpha */
+  --border-subtle: rgba(136, 136, 136, 0.18);
+
+  /* Selected row — gold rail + muted-gold bg tint */
+  --row-selected-bg:  rgba(212, 194, 157, 0.08);
+  --row-selected-bar: var(--color-gold);
+
+  /* Text */
+  --text:        #e8e6df;
+  --text-strong: #f5f2eb;
+  --text-muted:  #8a8678;
+  --text-faint:  #5f5d56;
+  --muted:       var(--text-muted); /* alias — page.tsx uses var(--muted) */
+
+  /* Semantic re-points to Ethos palette */
+  --accent:  var(--color-gold);
+  --success: #6f9c7f;
+  --warning: var(--color-muted-rose);
+  --danger:  #b34744;
+  --vip:     var(--color-gold);
+
+  /* Type */
+  --font-sans:  -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+  --font-serif: "Crimson Text", Georgia, "Times New Roman", serif;
+  --ring:       rgba(178, 154, 104, 0.35);
+}
+
+@theme inline {
+  /* Brand tokens → Tailwind utility class names (bg-gold, text-charcoal, etc) */
+  --color-charcoal:     var(--color-charcoal);
+  --color-gold:         var(--color-gold);
+  --color-muted-gold:   var(--color-muted-gold);
+  --color-beige:        var(--color-beige);
+  --color-warm-gray:    var(--color-warm-gray);
+  --color-forest-green: var(--color-forest-green);
+  --color-muted-rose:   var(--color-muted-rose);
+
+  /* Semantic → utility names */
+  --color-bg:            var(--bg);
+  --color-surface:       var(--surface);
+  --color-surface-2:     var(--surface-2);
+  --color-border:        var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-text:          var(--text);
+  --color-text-strong:   var(--text-strong);
+  --color-text-muted:    var(--text-muted);
+  --color-accent:        var(--accent);
+  --color-warning:       var(--warning);
+  --color-success:       var(--success);
+  --color-danger:        var(--danger);
+
+  --font-sans:  var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+}
+
+/* Selected-row helper — applied via className when a list row is highlighted */
+.row-selected {
+  background: var(--row-selected-bg);
+  box-shadow: inset 2px 0 0 0 var(--color-gold);
+}
+
+/* Scrollbar — subtle warm-gray thumb on dark track. Gold was too visually heavy
+   against the dense list (the scrollbar is structure, not brand surface). Hover
+   reveals gold for the brand cue. */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(178, 154, 104, 0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(178, 154, 104, 0.6); }

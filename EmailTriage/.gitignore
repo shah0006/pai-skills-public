@@ -1,0 +1,13 @@
+node_modules/
+triage.db
+triage.db-shm
+triage.db-wal
+com.pai.send-later.plist
+.env
+.env.local
+*.log
+scheduled/*.json
+scheduled/sent/
+!scheduled/.gitkeep
+
+.next/

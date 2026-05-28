@@ -10,6 +10,15 @@
 - Top-level `NOTICE` — aggregates third-party attributions (Daniel Miessler upstream)
 - `PROMOTION.md` — the eight-gate criteria for public release
 
+## Current skills
+
+| Skill | Description |
+|-------|-------------|
+| AppleMail | macOS Mail.app control via AppleScript (27-command CLI wrapper) |
+| AppleMessages | iMessage / SMS via Chat.db and AppleScript |
+| EmailTriage | Automated email triage pipeline (classify, stage, execute) with Next.js dashboard |
+| VaultLint | Obsidian vault validation (frontmatter, wikilinks, naming conventions) |
+
 ## Install
 
 Each skill is self-contained. Copy or symlink the desired skill folder into your PAI install:
@@ -38,7 +47,8 @@ The intent is to graduate every PAI v5 skill from private to public over time, s
 ## Companion repos
 
 - [pai-skills-private](https://github.com/shah0006/pai-skills-private) — working set + sanitization-pending
-- [pai-email-triage](https://github.com/shah0006/pai-email-triage) — separate repo for the EmailTriage skill (kept independent for tighter iteration)
+
+EmailTriage (previously at [pai-email-triage](https://github.com/shah0006/pai-email-triage)) was absorbed into this repo on 2026-05-28.
 
 ## License
 
